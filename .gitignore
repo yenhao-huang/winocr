@@ -1,0 +1,9 @@
+.claude
+data
+results/*
+tests/testcases/*
+tests/__pycache__/
+core/__pycache__/
+lib/__pycache__/
+
+!.gitkeep
