@@ -29,12 +29,6 @@ Add-WindowsCapability -Online -Name "Language.OCR~~~zh-TW~0.0.1.0"
 - 日文：`Language.OCR~~~ja-JP~0.0.1.0`
 - 簡體中文：`Language.OCR~~~zh-CN~0.0.1.0`
 
-查詢可用語言包：
-
-```bash
-python -m core.main --list-languages
-```
-
 ## 使用方法
 
 ### CLI 命令列工具
@@ -62,43 +56,6 @@ python -m core.main --filename my_ocr_results
 
 # 列出所有可用的 OCR 語言
 python -m core.main --list-languages
-```
-
-### Python API
-
-```python
-from lib.winocr import WinOCR
-
-# 初始化 OCR 引擎
-ocr_engine = WinOCR(language_code="zh-Hant")
-
-# 方法 1: 辨識單張圖片
-text = ocr_engine.recognize_image("path/to/image.png")
-print(text)
-
-# 方法 2: 批次辨識多張圖片
-# 載入目錄中的所有圖片
-image_paths = ocr_engine.load_images_recursive("path/to/images")
-
-# 批次辨識
-results = ocr_engine.batch_recognize_images(image_paths)
-
-# 儲存結果為 JSON
-ocr_engine.save_results(results, o_dir="output", filename="ocr_results")
-
-# 查詢可用語言
-languages = WinOCR.get_available_languages()
-for lang_tag, lang_name in languages:
-    print(f"{lang_tag}: {lang_name}")
-```
-
-### 進階範例
-
-參考 [tests/test_winocr.py](tests/test_winocr.py) 查看更多使用範例。
-
-```bash
-# 執行測試
-python tests/test_winocr.py
 ```
 
 ## 專案結構
@@ -176,28 +133,3 @@ from winrt.windows.storage.streams import InMemoryRandomAccessStream
 
 - [Windows.Media.Ocr API 官方文件](https://learn.microsoft.com/zh-tw/uwp/api/windows.media.ocr?view=winrt-26100)
 - [winocr 專案參考](https://github.com/GitHub30/winocr)
-
-## 常見問題
-
-### Q: 辨識結果不準確怎麼辦？
-
-A:
-1. 確認圖片清晰度是否足夠
-2. 檢查是否使用了正確的語言代碼
-3. 嘗試預處理圖片（調整對比度、銳化等）
-
-### Q: 如何安裝更多語言包？
-
-A: 使用 PowerShell 以管理員身份執行：
-
-```powershell
-Add-WindowsCapability -Online -Name "Language.OCR~~~<language-code>~0.0.1.0"
-```
-
-### Q: 支援哪些圖片格式？
-
-A: 預設支援 `.png`, `.jpg`, `.jpeg`, `.bmp`, `.tiff`，可透過 `--extensions` 參數自訂。
-
-## License
-
-本專案基於 Windows.Media.Ocr API 開發，請遵守相關使用條款。
