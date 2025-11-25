@@ -44,19 +44,10 @@ python -m core.main --in_dir ./images
 
 # 指定輸入和輸出目錄
 python -m core.main --in_dir ./images --o_dir ./output
-
-# 指定語言（繁體中文）
-python -m core.main --language zh-Hant
-
-# 指定圖片副檔名
-python -m core.main --extensions .png .jpg
-
-# 指定輸出檔案名稱
-python -m core.main --filename my_ocr_results
-
-# 列出所有可用的 OCR 語言
-python -m core.main --list-languages
 ```
+
+Tips: input image 越大越好 (1680*1280)
+
 
 ## 專案結構
 
